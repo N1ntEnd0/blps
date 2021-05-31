@@ -72,7 +72,7 @@ public class UserRepositoryService {
     public ResponseEntity<ResponseMessageDTO> authUserDTO(UserDTO userDTO){
         ResponseMessageDTO message = new ResponseMessageDTO();
         try {
-            user = this.findByEmailAndPassword(userDTO.getMail(), userDTO.getPassword());
+            user = this.findByLoginAndPassword(userDTO.getLogin(), userDTO.getPassword());
             TokenObject token = new TokenObject(jwTutils.generateToken(user.getMail()));
             message.setAnswer(token.getToken());
             return new ResponseEntity<>(message, HttpStatus.ACCEPTED);
@@ -96,8 +96,8 @@ public class UserRepositoryService {
     }
 
 
-    public User findByEmailAndPassword(String email, String password) throws UserNotFoundException{
-        User user  = this.userRepository.findByMailAndPassword(email, password);
+    public User findByLoginAndPassword(String login, String password) throws UserNotFoundException{
+        User user  = this.userRepository.findByLoginAndPassword(login, password);
         if(user == null){
             throw new UserNotFoundException("Пользователь с таким email не найден", HttpStatus.BAD_REQUEST);
         }

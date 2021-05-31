@@ -24,8 +24,8 @@ public class ValidationUserService {
     public void validateUserDTO_FOR_AUTH(UserDTO userDTO) throws UserValidationException{
         if(!validatePasswordUserDTO(userDTO.getPassword())){
             throw new UserValidationException("Invalid password. Please, try again", HttpStatus.UNAUTHORIZED);
-        }else if(!validateEmailUserDTO(userDTO.getMail())){
-            throw new UserValidationException("Invalid email. Please, try again", HttpStatus.BAD_REQUEST);
+        }else if(!validateLoginUserDTO(userDTO.getLogin())){
+            throw new UserValidationException("Invalid name. Please, try again", HttpStatus.BAD_REQUEST);
         }
     }
 
