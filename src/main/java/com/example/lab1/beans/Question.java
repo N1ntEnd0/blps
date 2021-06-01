@@ -14,7 +14,7 @@ public class Question {
     private Long id;
 
     @NotNull
-    private String Title;
+    private String title;
     @NotNull
     private String text;
     @NotNull
@@ -38,11 +38,11 @@ public class Question {
 
 
     public String getTitle() {
-        return Title;
+        return title;
     }
 
     public void setTitle(String title) {
-        Title = title;
+        this.title = title;
     }
 
     public String getText() {

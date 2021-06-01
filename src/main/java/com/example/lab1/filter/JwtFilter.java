@@ -31,7 +31,7 @@ public class JwtFilter implements Filter{
         String token = jwTutils.getTokenFromRequest((HttpServletRequest) servletRequest);
         if(token != null && jwTutils.validateToken(token)){
 //            logger.log(Level.INFO, "Filter logs: token exists");
-            String email = jwTutils.getEmailFromToken(token);
+            String email = jwTutils.getLoginFromToken(token);
             try{
                 UserDetails user = changeOrgUserDetailsService.loadUserByUsername(email);
                 UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());

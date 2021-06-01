@@ -75,8 +75,8 @@ public class DTOConverter {
     private User user;
     @Autowired
     private Answer answer;
-    @Autowired
-    private Question question;
+//    @Autowired
+//    private Question question;
     @Autowired
     private Tag tag;
 
@@ -100,13 +100,14 @@ public class DTOConverter {
         return answer;
     }
 
-    public Question convertQuestionFromDTO(QuestionDTO questionDTO) {
-        question.setId(questionDTO.getId());
+    public Question convertQuestionFromDTO(QuestionDTO questionDTO, User user, Set<Tag> tags) {
+        Question question = new Question();
         question.setScore(questionDTO.getScore());
         question.setStatus(questionDTO.getStatus());
         question.setText(questionDTO.getText());
         question.setTitle(questionDTO.getTitle());
-        question.setUser(questionDTO.getUser());
+        question.setTags(tags);
+        question.setUser(user);
         return question;
     }
 

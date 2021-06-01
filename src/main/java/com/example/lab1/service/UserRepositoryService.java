@@ -39,7 +39,7 @@ public class UserRepositoryService {
 
     public User getUserFromRequest(HttpServletRequest request) throws UserNotFoundException {
         String token = jwTutils.getTokenFromRequest(request);
-        String email = jwTutils.getEmailFromToken(token);
+        String email = jwTutils.getLoginFromToken(token);
         try {
             User user = this.findByEmail(email);
 //            logger.log(Level.INFO, "getting user from request" + user.getEmail());

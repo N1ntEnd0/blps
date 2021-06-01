@@ -45,7 +45,7 @@ public class JWTutils {
         return false;
     }
 
-    public String getEmailFromToken(String token) {
+    public String getLoginFromToken(String token) {
         Claims claims = Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody();
         return claims.getSubject();
     }

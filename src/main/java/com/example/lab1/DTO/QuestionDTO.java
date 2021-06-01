@@ -1,16 +1,15 @@
 package com.example.lab1.DTO;
 
-import com.example.lab1.beans.Tag;
 import com.example.lab1.beans.User;
 import java.util.Set;
 
 public class QuestionDTO {
 
     private Long id;
-    private String Title;
+    private String title;
     private String text;
     private String status;
-    private Set<TagsDTO> tags;
+    private Set<String> tags;
     private User user;
     private int score;
 
@@ -23,11 +22,11 @@ public class QuestionDTO {
     }
 
     public String getTitle() {
-        return Title;
+        return title;
     }
 
     public void setTitle(String title) {
-        Title = title;
+        this.title = title;
     }
 
     public String getText() {
@@ -46,11 +45,11 @@ public class QuestionDTO {
         this.status = status;
     }
 
-    public Set<TagsDTO> getTags() {
+    public Set<String> getTags() {
         return tags;
     }
 
-    public void setTags(Set<TagsDTO> tags) {
+    public void setTags(Set<String> tags) {
         this.tags = tags;
     }
 
