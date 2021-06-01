@@ -20,7 +20,7 @@ public class QuestionsController {
 
     @PutMapping("/add")
     public ResponseEntity<ResponseMessageDTO> addQuestion(@RequestBody QuestionDTO questionDTO, HttpServletRequest request) {
-        //validate
+        // #TODO validate
         ResponseMessageDTO responseMessageDTO = new ResponseMessageDTO();
         try {
             questionRepositoryService.saveFromDTO(questionDTO, request);
@@ -31,4 +31,12 @@ public class QuestionsController {
         responseMessageDTO.setAnswer("okey");
         return new ResponseEntity<>(responseMessageDTO, HttpStatus.OK);
     }
+
+
+//    @GetMapping("/all?tag={tag}")
+//    public ResponseEntity<ResponseMessageDTO> getAllQuestion(@RequestParam String tagName){
+//        // #TODO validate
+//        ResponseMessageDTO responseMessageDTO = new ResponseMessageDTO();
+//
+//    }
 }
