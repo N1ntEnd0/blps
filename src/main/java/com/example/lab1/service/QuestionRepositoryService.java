@@ -73,5 +73,3 @@ public class QuestionRepositoryService {
         return question;
     }
 }
-
-

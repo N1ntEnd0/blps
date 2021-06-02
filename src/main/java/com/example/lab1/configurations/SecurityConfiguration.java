@@ -1,7 +1,7 @@
 package com.example.lab1.configurations;
 
 import com.example.lab1.filter.JwtFilter;
-import com.example.lab1.service.ChangeOrgUserDetailsService;
+import com.example.lab1.service.StackOverflowUserDetailsService;
 import com.example.lab1.utils.JWTutils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -49,8 +49,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 
     @Bean
-    public ChangeOrgUserDetailsService changeOrgUserDetailsService(){
-        return new ChangeOrgUserDetailsService();
+    public StackOverflowUserDetailsService changeOrgUserDetailsService(){
+        return new StackOverflowUserDetailsService();
     }
 
     @Bean

@@ -3,17 +3,11 @@ package com.example.lab1.service;
 import com.example.lab1.beans.User;
 import com.example.lab1.exceptions.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Set;
-
-public class ChangeOrgUserDetailsService implements UserDetailsService {
+public class StackOverflowUserDetailsService implements UserDetailsService {
 
     @Autowired
     private UserRepositoryService userRepositoryService;
@@ -26,7 +20,7 @@ public class ChangeOrgUserDetailsService implements UserDetailsService {
         } catch (UserNotFoundException e) {
             e.printStackTrace();
         }
-        return new ChangeOrgUserDetails(user);
+        return new StackOverflowUserDetails(user);
     }
 
 //    private Collection<GrantedAuthority> getAuthorities(User user){

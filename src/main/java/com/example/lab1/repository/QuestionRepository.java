@@ -1,6 +1,7 @@
 package com.example.lab1.repository;
 
 import com.example.lab1.beans.Question;
+import com.example.lab1.beans.Tag;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.Optional;

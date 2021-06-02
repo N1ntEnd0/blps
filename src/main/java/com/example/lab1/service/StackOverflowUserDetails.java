@@ -10,11 +10,11 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
-public class ChangeOrgUserDetails implements UserDetails{
+public class StackOverflowUserDetails implements UserDetails{
 
     private User user;
 
-    public ChangeOrgUserDetails(User user) {
+    public StackOverflowUserDetails(User user) {
         this.user = user;
     }
 

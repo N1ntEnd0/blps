@@ -2,6 +2,7 @@ package com.example.lab1.controllers;
 
 import com.example.lab1.DTO.QuestionDTO;
 import com.example.lab1.DTO.ResponseMessageDTO;
+import com.example.lab1.exceptions.QuestionNotFoundException;
 import com.example.lab1.exceptions.TagNotFoundException;
 import com.example.lab1.exceptions.UserNotFoundException;
 import com.example.lab1.service.QuestionRepositoryService;
@@ -43,8 +44,17 @@ public class QuestionsController {
             ResponseMessageDTO messageDTO = new ResponseMessageDTO();
             messageDTO.setAnswer(e.getErrMessage());
             return new ResponseEntity<>(messageDTO, e.getErrStatus());
-    }
+        }
     }
 
-
+    @GetMapping("/{id}")
+    public ResponseEntity getQuestion(@PathVariable Long id){
+        try {
+            return new ResponseEntity(questionRepositoryService.findById(id), HttpStatus.OK);
+        } catch (QuestionNotFoundException e) {
+            ResponseMessageDTO messageDTO = new ResponseMessageDTO();
+            messageDTO.setAnswer(e.getErrMessage());
+            return new ResponseEntity<>(messageDTO, e.getErrStatus());
+        }
+    }
 }

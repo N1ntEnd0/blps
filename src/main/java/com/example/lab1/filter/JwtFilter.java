@@ -4,7 +4,7 @@ import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.example.lab1.service.ChangeOrgUserDetailsService;
+import com.example.lab1.service.StackOverflowUserDetailsService;
 import com.example.lab1.utils.JWTutils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -19,7 +19,7 @@ public class JwtFilter implements Filter{
     @Autowired
     private JWTutils jwTutils;
     @Autowired
-    private ChangeOrgUserDetailsService changeOrgUserDetailsService;
+    private StackOverflowUserDetailsService stackOverflowUserDetailsService;
 //    Logger logger = LogManager.getLogger(JwtFilter.class);
 
     @Override
@@ -33,7 +33,7 @@ public class JwtFilter implements Filter{
 //            logger.log(Level.INFO, "Filter logs: token exists");
             String email = jwTutils.getLoginFromToken(token);
             try{
-                UserDetails user = changeOrgUserDetailsService.loadUserByUsername(email);
+                UserDetails user = stackOverflowUserDetailsService.loadUserByUsername(email);
                 UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
                 SecurityContextHolder.getContext().setAuthentication(auth);
 //                logger.log(Level.INFO, "Filter logs: auth completed");
