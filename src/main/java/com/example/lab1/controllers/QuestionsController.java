@@ -34,8 +34,8 @@ public class QuestionsController {
     }
 
 
-    @GetMapping("/all?tag={tag}")
-    public ResponseEntity getAllQuestion(@RequestParam String tagName){
+    @GetMapping("/all/by-tage/{tagName}")
+    public ResponseEntity getAllQuestion(@PathVariable String tagName){
         // #TODO validate
         try {
             return new ResponseEntity(questionRepositoryService.getAllQuestionsByTagName(tagName), HttpStatus.OK);

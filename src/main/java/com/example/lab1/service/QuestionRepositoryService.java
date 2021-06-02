@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -51,7 +52,7 @@ public class QuestionRepositoryService {
 
     public ResponseEntity getAllQuestionsByTagName(String name) throws TagNotFoundException {
         ResponseMessageDTO messageDTO = new ResponseMessageDTO();
-        Set<Question> questions = (Set<Question>) questionRepository.findAll();
+        ArrayList<Question> questions = (ArrayList<Question>) questionRepository.findAll();
         Set<QuestionDTO> questionDTOS = new HashSet<>();
         for (Question question: questions) {
                 if (question.getTags().contains(tagRepositoryService.getTagByName(name))){
