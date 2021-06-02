@@ -13,6 +13,10 @@ public class Answer {
     private Long id;
 
     @NotNull
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Question question;
+
+    @NotNull
     private boolean approve;
     @NotNull
     private String text;
@@ -21,6 +25,15 @@ public class Answer {
     @NotNull
     @ManyToOne(fetch = FetchType.EAGER)
     private User user;
+
+
+    public Question getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(Question question) {
+        this.question = question;
+    }
 
     public Long getId() {
         return id;

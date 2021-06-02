@@ -8,7 +8,16 @@ public class AnswerDTO {
     private boolean approve;
     private String text;
     private int score;
-    private User user;
+    private String userLogin;
+
+
+    public String getUserLogin() {
+        return userLogin;
+    }
+
+    public void setUserLogin(String userLogin) {
+        this.userLogin = userLogin;
+    }
 
     public Long getId() {
         return id;
@@ -42,11 +51,4 @@ public class AnswerDTO {
         this.score = score;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 }

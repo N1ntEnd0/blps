@@ -51,7 +51,7 @@ public class DTOConverter {
         answerDTO.setId(answer.getId());
         answerDTO.setScore(answer.getScore());
         answerDTO.setText(answer.getText());
-        answerDTO.setUser(answer.getUser());
+        answerDTO.setUserLogin(answer.getUser().getLogin());
         answerDTO.setApprove(answerDTO.isApprove());
         return answerDTO;
     }
@@ -91,12 +91,12 @@ public class DTOConverter {
         return user;
     }
 
-    public Answer convertAnswerFromDTO(AnswerDTO answerDTO) {
-        answer.setApprove(answerDTO.isApprove());
-        answer.setId(answerDTO.getId());
-        answer.setScore(answerDTO.getScore());
+    public Answer convertAnswerFromDTO(AnswerDTO answerDTO, User user, Question question) {
+        answer.setApprove(false);
+        answer.setScore(0);
+        answer.setQuestion(question);
         answer.setText(answerDTO.getText());
-        answer.setUser(answerDTO.getUser());
+        answer.setUser(user);
         return answer;
     }
 

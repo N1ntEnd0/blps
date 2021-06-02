@@ -38,7 +38,7 @@ public class QuestionsController {
     public ResponseEntity getAllQuestion(@PathVariable String tagName){
         // #TODO validate
         try {
-            return new ResponseEntity(questionRepositoryService.getAllQuestionsByTagName(tagName), HttpStatus.OK);
+            return questionRepositoryService.getAllQuestionsByTagName(tagName);
         } catch (TagNotFoundException e){
             ResponseMessageDTO messageDTO = new ResponseMessageDTO();
             messageDTO.setAnswer(e.getErrMessage());

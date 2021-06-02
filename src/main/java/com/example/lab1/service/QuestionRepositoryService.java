@@ -4,6 +4,7 @@ import com.example.lab1.DTO.QuestionDTO;
 import com.example.lab1.DTO.ResponseMessageDTO;
 import com.example.lab1.beans.Question;
 import com.example.lab1.beans.User;
+import com.example.lab1.exceptions.QuestionNotFoundException;
 import com.example.lab1.exceptions.TagNotFoundException;
 import com.example.lab1.exceptions.UserNotFoundException;
 import com.example.lab1.repository.QuestionRepository;
@@ -62,4 +63,15 @@ public class QuestionRepositoryService {
         return new ResponseEntity(questionDTOS, HttpStatus.OK);
 
     }
+
+
+    public Question findById(Long id) throws QuestionNotFoundException {
+        Question question = questionRepository.findById(id).get();
+        if(question == null){
+            throw new QuestionNotFoundException("Вопроса с таким id не существует!", HttpStatus.BAD_REQUEST);
+        }
+        return question;
+    }
 }
+
+
