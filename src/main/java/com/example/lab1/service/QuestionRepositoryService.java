@@ -4,6 +4,7 @@ import com.example.lab1.DTO.QuestionDTO;
 import com.example.lab1.DTO.ResponseMessageDTO;
 import com.example.lab1.beans.Question;
 import com.example.lab1.beans.User;
+import com.example.lab1.exceptions.TagNotFoundException;
 import com.example.lab1.exceptions.UserNotFoundException;
 import com.example.lab1.repository.QuestionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Set;
 
 @Service
@@ -27,7 +28,7 @@ public class QuestionRepositoryService {
 
 
     @Autowired
-    private TagRepositoryService repositoryService;
+    private TagRepositoryService tagRepositoryService;
 
 
 
@@ -39,7 +40,7 @@ public class QuestionRepositoryService {
         // #TODO validate done
         try {
             User user = userRepositoryService.getUserFromRequest(request);
-            this.questionRepository.save(dtoConverter.convertQuestionFromDTO(questionDTO, user, repositoryService.getAllTagsByQuery(questionDTO.getTags())));
+            this.questionRepository.save(dtoConverter.convertQuestionFromDTO(questionDTO, user, tagRepositoryService.getAllTagsByQuery(questionDTO.getTags())));
         }catch (UserNotFoundException e){
             e.setErrMessage("User not found!");
             e.setErrStatus(HttpStatus.BAD_REQUEST);
@@ -48,9 +49,16 @@ public class QuestionRepositoryService {
     }
 
 
-    public ResponseEntity<ResponseMessageDTO> getAllQuestionsByTagName(String name){
+    public ResponseEntity getAllQuestionsByTagName(String name) throws TagNotFoundException {
+        ResponseMessageDTO messageDTO = new ResponseMessageDTO();
         Set<Question> questions = (Set<Question>) questionRepository.findAll();
-        
+        Set<QuestionDTO> questionDTOS = new HashSet<>();
+        for (Question question: questions) {
+                if (question.getTags().contains(tagRepositoryService.getTagByName(name))){
+                    questionDTOS.add(dtoConverter.convertQuestionToDTO(question));
+                }
+            }
+        return new ResponseEntity(questionDTOS, HttpStatus.OK);
 
     }
 }

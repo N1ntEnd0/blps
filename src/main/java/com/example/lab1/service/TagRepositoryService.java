@@ -1,8 +1,10 @@
 package com.example.lab1.service;
 
 import com.example.lab1.beans.Tag;
+import com.example.lab1.exceptions.TagNotFoundException;
 import com.example.lab1.repository.TagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -29,5 +31,13 @@ public class TagRepositoryService {
                 resultSet.add(tagFromRepository);
         }
         return resultSet;
+    }
+
+    public Tag getTagByName(String name) throws TagNotFoundException {
+        Tag tag = tagRepository.findByName(name);
+        if(tag==null){
+            throw  new TagNotFoundException("Тэг с таким именем не существует", HttpStatus.BAD_REQUEST);
+        }
+        return tag;
     }
 }

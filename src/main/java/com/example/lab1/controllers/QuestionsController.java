@@ -2,6 +2,7 @@ package com.example.lab1.controllers;
 
 import com.example.lab1.DTO.QuestionDTO;
 import com.example.lab1.DTO.ResponseMessageDTO;
+import com.example.lab1.exceptions.TagNotFoundException;
 import com.example.lab1.exceptions.UserNotFoundException;
 import com.example.lab1.service.QuestionRepositoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,10 +34,17 @@ public class QuestionsController {
     }
 
 
-//    @GetMapping("/all?tag={tag}")
-//    public ResponseEntity<ResponseMessageDTO> getAllQuestion(@RequestParam String tagName){
-//        // #TODO validate
-//        ResponseMessageDTO responseMessageDTO = new ResponseMessageDTO();
-//
-//    }
+    @GetMapping("/all?tag={tag}")
+    public ResponseEntity getAllQuestion(@RequestParam String tagName){
+        // #TODO validate
+        try {
+            return new ResponseEntity(questionRepositoryService.getAllQuestionsByTagName(tagName), HttpStatus.OK);
+
+        } catch (TagNotFoundException e){
+            ResponseMessageDTO messageDTO = new ResponseMessageDTO();
+            messageDTO.setAnswer(e.getErrMessage());
+            return new ResponseEntity<>(messageDTO, e.getErrStatus());
+    }
+
+    }
 }
